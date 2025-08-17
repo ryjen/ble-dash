@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Dimensions, StyleSheet, ScrollView } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import manager from './BleManager'; // Your BLE manager instance
+import manager from './BleManager';
 import { Buffer } from 'buffer';
 
-const DashboardScreen = ({ route }) => {
-  const { deviceId, serviceUUID, characteristicUUID } = route.params;
-  const [dataPoints, setDataPoints] = useState([]);
-  const [labels, setLabels] = useState([]);
+const DashboardScreen = ({navigator}: {navigator: any}) => {
+  const { deviceId, serviceUUID, characteristicUUID } = navigator.route.params;
   const [currentValue, setCurrentValue] = useState(null);
 
   useEffect(() => {
@@ -24,17 +22,15 @@ const DashboardScreen = ({ route }) => {
             console.warn('Monitor error:', error);
             return;
           }
+          if (!characteristic || !characteristic.value) {
+            console.warn('No characteristic value received');
+            return;
+          }
 
-          const base64 = characteristic?.value;
-          const buffer = Buffer.from(base64, 'base64');
-          const raw = buffer.readInt16LE(0); // Adjust based on your sensor
-          const value = raw / 100;
-
-          const timestamp = new Date().toLocaleTimeString();
-
-          setCurrentValue(value);
-          setDataPoints(prev => [...prev.slice(-9), value]);
-          setLabels(prev => [...prev.slice(-9), timestamp]);
+          // Decode the characteristic value as json
+          const value = Buffer.from(characteristic.value, 'base64').toString('utf-8');
+          const parsedValue = JSON.parse(value);
+          setCurrentValue(parsedValue);
         }
       );
     };
@@ -44,8 +40,11 @@ const DashboardScreen = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Live Temperature</Text>
-      <Text style={styles.value}>{currentValue?.toFixed(1)} °C</Text>
+
+      <Text style={styles.title}>Device Dashboard</Text>
+      <Text style={styles.value}>Device ID: {deviceId}</Text>
+      <Text style={styles.value}>Service UUID: {serviceUUID}</Text>
+      <Text style={styles.value}>Characteristic UUID: {characteristicUUID}</Text> 
 
       <LineChart
         data={{

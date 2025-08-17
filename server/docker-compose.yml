@@ -1,20 +1,10 @@
-version: '3.8'
-
 services:
   robot-ble-server:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: robot-ble
-    privileged: true  # Required for Bluetooth access
-    network_mode: host  # Required for BLE functionality
-    environment:
-      - HTTP_PORT=${HTTP_PORT:-8080}
+    privileged: true
+    network_mode: host
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${HTTP_PORT:-8080}/stats", "||", "exit", "1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
 

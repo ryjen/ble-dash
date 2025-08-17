@@ -1,16 +1,15 @@
-// components/SensorChart.js
 import React from 'react';
 import { LineChart, Grid } from 'react-native-svg-charts';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function SensorChart({ title, data, color }) {
   const values = data.map(d => d.value);
 
   return (
-    <View style={{ marginVertical: 10 }}>
-      <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>{title}</Text>
+    <View style={styles.container} >
+      <Text style={styles.title}>{title}</Text>
       <LineChart
-        style={{ height: 150 }}
+        style={styles.chart}
         data={values}
         svg={{ stroke: color }}
         contentInset={{ top: 20, bottom: 20 }}
@@ -20,3 +19,16 @@ export default function SensorChart({ title, data, color }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 10,
+  },
+  title: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  chart: {
+    height: 150,
+  },
+});

@@ -1,0 +1,109 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      bleno:
+        specifier: ^0.5.0
+        version: 0.5.0
+      bluetooth-hci-socket:
+        specifier: ^0.5.1
+        version: 0.5.1
+
+packages:
+
+  bleno@0.5.0:
+    resolution: {integrity: sha512-oH/iddkMIMoW0HgzhN32My+qUCz1sKSQsAvIiDFaeY8RGnZ/S08Xgo2XWwhWSaA9bVsVjY3zmbeaQ55H+W+zBQ==}
+    engines: {node: '>=0.8'}
+    os: [darwin, linux, android, freebsd, win32]
+
+  bluetooth-hci-socket@0.5.1:
+    resolution: {integrity: sha512-5/cPO2R+X4UXLudZOevREf3kwyCNCVovA9rcXk5smBgx+q/sIucfkC6F57+xWR5X17bY931w6bB2EUaPh9ArfQ==}
+    os: [linux, android, win32]
+
+  bplist-parser@0.0.6:
+    resolution: {integrity: sha512-fGeghPEH4Eytvf+Mi446aKcDqvkA/+eh6r7QGiZWMQG6TzqrnsToLP379XFfqRSZ41+676hhGIm++maNST1Apw==}
+
+  debug@2.6.9:
+    resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  ms@2.0.0:
+    resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
+
+  nan@2.23.0:
+    resolution: {integrity: sha512-1UxuyYGdoQHcGg87Lkqm3FzefucTa0NAiOcuRsDmysep3c1LVCRK2krrUDafMWtjSG04htvAmvg96+SDknOmgQ==}
+
+  node-addon-api@4.3.0:
+    resolution: {integrity: sha512-73sE9+3UaLYYFmDsFZnqCInzPyh3MqIwZO9cw58yIqAZhONrrabrYyYe3TuIqtIiOuTXVhsGau8hcrhhwSsDIQ==}
+
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
+  usb@1.9.2:
+    resolution: {integrity: sha512-dryNz030LWBPAf6gj8vyq0Iev3vPbCLHCT8dBw3gQRXRzVNsIdeuU+VjPp3ksmSPkeMAl1k+kQ14Ij0QHyeiAg==}
+    engines: {node: '>=10.16.0'}
+
+  xpc-connection@0.1.4:
+    resolution: {integrity: sha512-Np4+cx5l9zhSNrH5O5niVqVT0vBnja4IG5CxuBgCvTdWGiyujRwUTSj/FtT66KX84/MMCKpt5wIcuORBMFT6qQ==}
+    engines: {node: '>=0.8'}
+    os: [darwin]
+
+snapshots:
+
+  bleno@0.5.0:
+    dependencies:
+      debug: 2.6.9
+    optionalDependencies:
+      bluetooth-hci-socket: 0.5.1
+      bplist-parser: 0.0.6
+      xpc-connection: 0.1.4
+    transitivePeerDependencies:
+      - supports-color
+
+  bluetooth-hci-socket@0.5.1:
+    dependencies:
+      debug: 2.6.9
+      nan: 2.23.0
+    optionalDependencies:
+      usb: 1.9.2
+    transitivePeerDependencies:
+      - supports-color
+
+  bplist-parser@0.0.6:
+    optional: true
+
+  debug@2.6.9:
+    dependencies:
+      ms: 2.0.0
+
+  ms@2.0.0: {}
+
+  nan@2.23.0: {}
+
+  node-addon-api@4.3.0:
+    optional: true
+
+  node-gyp-build@4.8.4:
+    optional: true
+
+  usb@1.9.2:
+    dependencies:
+      node-addon-api: 4.3.0
+      node-gyp-build: 4.8.4
+    optional: true
+
+  xpc-connection@0.1.4:
+    dependencies:
+      nan: 2.23.0
+    optional: true

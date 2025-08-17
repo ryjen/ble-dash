@@ -1,26 +1,30 @@
-FROM python:3.9-slim
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
 
-# Install minimal system dependencies
-RUN apt-get update && apt-get install -y \
-    bluez \
-    bluez-tools \
-    bluetooth \
-    curl \
-    procps \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy application files (use the simplified version)
-COPY robot_ble_server.py ./robot_ble_server.py
-COPY start.sh ./start.sh
+# Install Python and pip
+RUN apk add --no-cache python3 py3-pip make
 
-# Make start script executable
-RUN chmod +x start.sh
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+ produces package-lock.json)
+COPY package*.json ./
 
-# Expose HTTP port (configurable via environment)
-EXPOSE 8080
+RUN npm install
 
-# Run the application
-CMD ["./start.sh"]
+# Copy app source code
+COPY index.js ./
+
+# Command to run the application
+CMD [ "npm", "start" ]
+
+# Important Note for BLE in Docker:
+# For the BLE server to work, the Docker container needs access to the host's Bluetooth adapter.
+# This typically requires running the container with elevated privileges and/or specific device mappings.
+# Example run command (adjust as per your system and Bluetooth adapter):
+# docker run --net=host --privileged -it <your-image-name>
+# Or, if you have a specific Bluetooth device:
+# docker run --device=/dev/bluetooth --device=/dev/bus/usb/<bus>/<device> -it <your-image-name>
+# Consult your system's documentation for proper Bluetooth device mapping in Docker.

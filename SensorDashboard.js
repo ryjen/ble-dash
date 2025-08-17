@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Alert, ScrollView } from 'react-native';
+import { Text, Alert, ScrollView } from 'react-native';
 import { combineLatest } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { createSensorStream } from '../utils/sensorStream';

@@ -1,3 +1,0 @@
-bleak>=0.20.0
-dbus-python>=1.2.18
-PyGObject>=3.42.0

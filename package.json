@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.27.1",
+    "@react-navigation/native": "^7.1.17",
     "react": "19.1.0",
     "react-native-ble-plx": "^3.5.0",
     "react-native-chart-kit": "^6.12.0",
